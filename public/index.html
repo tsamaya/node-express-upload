@@ -74,6 +74,65 @@
         </div>
     </section>
 
+    <section class="section">
+        <div class="container">
+            <h1 class="title">
+                Multiple files
+            </h1>
+
+            <div id="multiple-files" class="file has-name">
+                <label class="file-label">
+                    <input class="file-input" type="file" name="multiplefile" multiple>
+                    <span class="file-cta">
+                        <span class="file-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </span>
+                        <span class="file-label">
+                            Choose files…
+                        </span>
+                    </span>
+                    <span class="file-name">
+                        No file uploaded
+                    </span>
+                </label>
+                <div class="buttons mx-5">
+                    <button class="button is-primary" onclick="uploadMultipleFile()">Submit</button>
+                </div>
+            </div>
+
+            <script>
+                const filesInput = document.querySelector('#multiple-files input[type=file]');
+                filesInput.onchange = () => {
+                    if (filesInput.files.length > 0) {
+                        const fileNames = document.querySelector('#multiple-files .file-name');
+                        let names = '';
+                        for (let index = 0; index < filesInput.files.length; index++) {
+                            names = filesInput.files[index].name + ' , ' + names;
+                        }
+                        fileNames.textContent = names;
+                    }
+                }
+                function uploadMultipleFile() {
+                    const fileInput = document.querySelector('#multiple-files input[type=file]');
+                    const formData = new FormData();
+                    for (let index = 0; index < fileInput.files.length; index++) {
+                        formData.append('multiplefiles', fileInput.files[index]);
+                    }
+
+
+                    const options = {
+                        method: 'POST',
+                        body: formData,
+                    };
+
+                    fetch('http://localhost:3000/upload/multiple', options)
+                        .then((res) => res.json())
+                        .then((data) => console.log(data));
+                }
+            </script>
+        </div>
+    </section>
+
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
 </body>
