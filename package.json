@@ -1,0 +1,22 @@
+{
+  "name": "node-express-upload",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": "git@github.com:tsamaya/node-express-upload.git",
+  "author": "arnaud ferrand <arferrand@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start:dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.7-alpha.3",
+    "lodash": "^4.17.19",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}

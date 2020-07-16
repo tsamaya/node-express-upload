@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Upload file with express!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+</head>
+
+<body>
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    Upload files
+                </h1>
+                <h2 class="subtitle">
+                    Uploadging single and multiple files with <strong>express</strong>!
+                </h2>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h1 class="title">
+                Single file
+            </h1>
+
+            <div id="single-file" class="file has-name">
+                <label class="file-label">
+                    <input class="file-input" type="file" name="singlefile">
+                    <span class="file-cta">
+                        <span class="file-icon">
+                            <i class="fas fa-upload"></i>
+                        </span>
+                        <span class="file-label">
+                            Choose a file…
+                        </span>
+                    </span>
+                    <span class="file-name">
+                        No file uploaded
+                    </span>
+                </label>
+                <div class="buttons mx-5">
+                    <button class="button is-primary" onclick="uploadSingleFile()">Submit</button>
+                </div>
+            </div>
+
+            <script>
+                const fileInput = document.querySelector('#single-file input[type=file]');
+                fileInput.onchange = () => {
+                    if (fileInput.files.length > 0) {
+                        const fileName = document.querySelector('#single-file .file-name');
+                        fileName.textContent = fileInput.files[0].name;
+                    }
+                }
+                function uploadSingleFile() {
+                    const fileInput = document.querySelector('#single-file input[type=file]');
+                    const formData = new FormData();
+                    formData.append('singlefile', fileInput.files[0]);
+
+                    const options = {
+                        method: 'POST',
+                        body: formData,
+                    };
+
+                    fetch('http://localhost:3000/upload', options)
+                        .then((res) => res.json())
+                        .then((data) => console.log(data));
+                }
+            </script>
+        </div>
+    </section>
+
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+</body>
+
+</html>
